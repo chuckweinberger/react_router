@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './pages/App'
+import Layout from './pages/Layout'
 import About from './pages/About'
 import Repos from './pages/Repos'
 import Repo from './components/Repo'
@@ -12,7 +12,7 @@ const app = document.getElementById('app');
 
 ReactDOM.render(
 	<Router history={browserHistory}>
-		<Route path="/" component={App}>
+		<Route path="/" component={Layout}>
 			<IndexRoute component={Home}/>
 			<Route path="/about" component={About} />
 			<Route path="/repos" component={Repos} 	>
