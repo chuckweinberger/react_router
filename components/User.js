@@ -1,4 +1,4 @@
-// modules/Repo.js
+// components/User
 
 import React from 'react'
 
@@ -9,7 +9,7 @@ export default React.createClass({
     console.log(params)
 		return(
 			<div>
-				<h2>{params.reponame}</h2>
+				<h2>{params.userName}</h2>
 			</div>
 		)
 	}
