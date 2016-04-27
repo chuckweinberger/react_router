@@ -8,9 +8,9 @@ export default React.createClass({
     	<div>
 	    	<h1>React Router Tutorial</h1>
 	    	<ul role="nav">
-	    		<li><NavLink onlyActiveOnIndex={true} to="/" activeClassName="active">Home</NavLink></li>
-	    		<li><NavLink to="/about" activeClassName="active">About</NavLink></li>
-	    		<li><NavLink to="/repos" activeClassName="active">Repos</NavLink></li>
+	    		<NavLink className="btn btn-success" onlyActiveOnIndex={true} to="/" >Home</NavLink>
+	    		<NavLink className="btn btn-success" to="/about" >About</NavLink>
+	    		<NavLink className="btn btn-success" to="/repos" >Repos</NavLink>
 	    	</ul>
 
 	    	{this.props.children}

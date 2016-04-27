@@ -20,4 +20,4 @@ ReactDOM.render(
 			</Route>
 		</Route>
 	</Router>
-, document.getElementById('app'))
+, app)
