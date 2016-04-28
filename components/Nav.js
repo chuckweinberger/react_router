@@ -23,6 +23,7 @@ export default class Nav extends React.Component {
     const usersClass = location.pathname.match(/^\/users/) ? "active" : "";
     const storiesClass = location.pathname.match(/^\/stories/) ? "active" : "";
     const navClass = collapsed ? "collapse" : "";
+    
 
     return (
       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">

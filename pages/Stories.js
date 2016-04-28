@@ -6,7 +6,7 @@ export default class Stories extends React.Component {
 
 	render(){
 		return <div>
-      Stories
+      Stories list goes here
 		</div>
 	}
 }
