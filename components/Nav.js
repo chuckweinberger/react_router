@@ -20,7 +20,7 @@ export default class Nav extends React.Component {
     const { location } = this.props;
     const { collapsed } = this.state;
     const dashClass = location.pathname === "/" ? "active" : "";
-    const usersClass = location.pathname.match(/^\/users/) ? "active" : "";
+    const usersClass = location.pathname.match(/^\/user/) ? "active" : "";
     const storiesClass = location.pathname.match(/^\/stories/) ? "active" : "";
     const navClass = collapsed ? "collapse" : "";
     

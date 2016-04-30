@@ -4,12 +4,14 @@ import Nav from "../components/Nav";
 
 
 export default React.createClass({
+  
+                
 	render() {
     const { location } = this.props;
     const containerStyle = {
       marginTop: "60px"
     };
-    console.log("layout");
+    
     return (
     	<div>
 

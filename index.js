@@ -11,20 +11,20 @@ import { Router, Route, browserHistory, IndexRoute} from 'react-router'
 
 const app = document.getElementById('app');
 
-const store = {
-                users: [ { username: "Chuck", email: "cweinberger@gmail.com", _id: "1" },
-                  { username: "Aron", email: "aron@gmail.com", _id: "2" },
-                  { username: "Bob", email: "bob@gmail.com", _id: "3" }
-                ],
-                stories: []
-              };
+// const store = {
+//                 users: [ { username: "Chuck", email: "cweinberger@gmail.com", _id: "1" },
+//                   { username: "Aron", email: "aron@gmail.com", _id: "2" },
+//                   { username: "Bob", email: "bob@gmail.com", _id: "3" }
+//                 ],
+//                 stories: []
+//               };
 
-const createElement = (Component, props) => {
-  return <Component store={store} {...props} />
-};
+// const createElement = (Component, props) => {
+//   return <Component store={store} {...props} />
+// };
 
 ReactDOM.render(
-	<Router history={browserHistory} createElement={createElement}>
+	<Router history={browserHistory}> 
 		<Route path="/" component={Layout}>
 			<IndexRoute component={Dash}/>
 			<Route path="stories" component={Stories} />
