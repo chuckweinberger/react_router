@@ -1,6 +1,6 @@
-import {ADD_USER, EMAIL_CHANGE, USERNAME_CHANGE} from '../constants/storeConstants';
+import {ADD_USER, EMAIL_CHANGE, USERNAME_CHANGE, SHOW_USER_DETAILS} from '../constants/actionTypes';
 
-const addUser = (user= {  username: '', 
+exports.addUser = (user= {  username: '', 
                           email: '',
                           _id: null 
                         }) => ({
@@ -8,12 +8,20 @@ const addUser = (user= {  username: '',
     user
 });
 
-const emailChange = (email='') => ({
+exports.emailChange = (email='') => ({
     type: EMAIL_CHANGE,
     email
 });
 
-const usernameChange = (username='') => ({
+exports.usernameChange = (username='') => ({
     type: USERNAME_CHANGE,
     username
 });
+
+exports.showUserDetails = (_id=null) => {
+  console.log(`A user with an id of ${_id} was clicked.`)
+  return ({
+    type: SHOW_USER_DETAILS,
+    _id
+  });
+}
