@@ -2,15 +2,15 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Router, Route, browserHistory, IndexRoute} from 'react-router'
 import { Provider } from 'react-redux'
-import {createStore} from 'redux';
+import { createStore } from 'redux' 
 
 import Layout from './pages/Layout'
 import Dash from './pages/Dash'
 import Stories from './pages/Stories'
-import UserListContainer from './pages/UserListContainer';
+import UserListContainer from './pages/UserListContainer' 
 import NoMatch from './pages/NoMatch'
-import usersReducer from './reducers/usersReducer';
-import { addUser } from './creators/userCreators';
+import reducer from './reducers/index.js' 
+import { addUser } from './creators/userCreators' 
 
 const app = document.getElementById('app');
 
@@ -20,7 +20,7 @@ let users = [ { username: "Chuck", email: "cweinberger@gmail.com" },
             ];
                 
 
-let store = createStore(usersReducer);
+let store = createStore(reducer);
 const { getState, dispatch } = store;
 
 let unsubscribe = store.subscribe(() =>

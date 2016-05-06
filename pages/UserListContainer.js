@@ -4,13 +4,13 @@ import React, { propType } from 'react'
 import { connect } from 'react-redux'
 
 import Users from '../components/Users'
-import { showUserDetails } from '../creators/userCreators'
+import { showUserDetails } from '../creators/uiCreators'
 
 
-  const mapStateToProps = ({ users, _id }) => {
+  const mapStateToProps = ( { usersReducer, uiReducer }) => {
     return{
-      users: users,
-      showUser: _id
+      users: usersReducer.users,
+      showUser: uiReducer._id
     }
   }
 
