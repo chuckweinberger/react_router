@@ -10,7 +10,7 @@ import Stories from './pages/Stories'
 import UserListContainer from './pages/UserListContainer' 
 import NoMatch from './pages/NoMatch'
 import reducer from './reducers/index.js' 
-import { addUser } from './creators/userCreators' 
+import { addUser } from './actions/userActions' 
 
 const app = document.getElementById('app');
 

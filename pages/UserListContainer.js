@@ -4,7 +4,7 @@ import React, { propType } from 'react'
 import { connect } from 'react-redux'
 
 import Users from '../components/Users'
-import { showUserDetails } from '../creators/uiCreators'
+import { showUserDetails } from '../actions/uiActions'
 
 
   const mapStateToProps = ( { usersReducer, uiReducer }) => {
