@@ -1,6 +1,6 @@
 import { ADD_USER } from '../constants/actionTypes'
 
-export default function usersReducer(state={ users:[] }, action) {
+export default function users(state={ users:[] }, action) {
     switch (action.type) {
         case ADD_USER:
           return {

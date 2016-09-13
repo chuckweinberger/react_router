@@ -17,16 +17,30 @@ import { showingUserChange } from '../actions/uiActions'
 
   const mapStateToProps = (store) => {
     return{
-      users: store.usersReducer.users,
-      showingUserId: store.uiReducer.showingUserId
+      users: store.users.users,
+      showingUserId: store.ui.showingUserId
     }
   }
 
+  
   const userListContainer = connect(
     mapStateToProps,
     mapDispatchToProps
   )(Users)
 
-
   export default userListContainer
-    
+
+  //   @connect(mapStateToProps, mapDispatchToProps)
+  //
+  //   export default class userListContainer extends React.Component {
+  //
+  //     render(){
+  //       const { users, showingUserId, onUserClick } = this.props;
+  //
+  //       return(
+  //         <Users users={users} showingUserId={showingUserId} onUserClick={onUserClick}>
+  //         </Users>
+  //       )
+  //     }
+  //
+  //   }   

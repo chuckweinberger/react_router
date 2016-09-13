@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
-import usersReducer from './usersReducer'
-import currentUserReducer from './currentUserReducer'
-import authReducer from './authReducer'
-import uiReducer from './uiReducer'
+import users from './users'
+import currentUser from './currentUser'
+import auth from './auth'
+import ui from './ui'
 
 export default combineReducers({
-  usersReducer,
-  currentUserReducer,
-  authReducer,
-  uiReducer
+  users,
+  currentUser,
+  auth,
+  ui
 })
