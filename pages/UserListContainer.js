@@ -4,31 +4,29 @@ import React, { propType } from 'react'
 import { connect } from 'react-redux'
 
 import Users from '../components/Users'
-import { showUserDetails } from '../actions/uiActions'
+import { showingUserChange } from '../actions/uiActions'
 
-
-  const mapStateToProps = ( { usersReducer, uiReducer }) => {
-    return{
-      users: usersReducer.users,
-      showUser: uiReducer._id
-    }
-  }
 
   const mapDispatchToProps = (dispatch) => {
     return{
       onUserClick: (_id) => {
-        dispatch(showUserDetails(_id))
+        dispatch(showingUserChange(_id));
       }
     }
   }
 
+  const mapStateToProps = (store) => {
+    return{
+      users: store.usersReducer.users,
+      showingUserId: store.uiReducer.showingUserId
+    }
+  }
 
-  
-  const UserListContainer = connect(
+  const userListContainer = connect(
     mapStateToProps,
     mapDispatchToProps
   )(Users)
-  
-  export default UserListContainer
 
-  
+
+  export default userListContainer
+    

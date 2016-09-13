@@ -5,7 +5,7 @@ import User from './User'
 import UserDetails from './UserDetails'
 
 
-export default ({ users, showUser, onUserClick }) => (
+export default ({ users, showingUserId, onUserClick}) => (
   <div>
     <div className='col-sm-3 col-md-2 sidebar'>
       <h2>List of Users</h2>
@@ -20,7 +20,7 @@ export default ({ users, showUser, onUserClick }) => (
 		  </ul>
     </div>
     <div className='col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main'>
-      <UserDetails showUser={ showUser} />
+      <UserDetails showingUserId={ showingUserId } />
     </div>
   </div>
 )

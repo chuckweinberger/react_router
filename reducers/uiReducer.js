@@ -1,25 +1,16 @@
-import { EMAIL_CHANGE, USERNAME_CHANGE, SHOW_USER_DETAILS } from '../constants/actionTypes';
+import { SHOWING_USER_CHANGE } from '../constants/actionTypes'
 
-export default function usersReducer(state={ userName:'', email: '', _id: '' }, action) {
+export default function uiReducer(state={ showingUserId: null }, action) {
   
   switch (action.type) {
-      case EMAIL_CHANGE:
-      return {
-          ...state,
-          email: action.email
-      };
-      case USERNAME_CHANGE:
-      return {
-          ...state,
-          username: action.username
-      };
-      case SHOW_USER_DETAILS:
+      case SHOWING_USER_CHANGE:
       return {
         ...state,
-        _id: action._id
+        showingUserId: action.showingUserId
       };
-      default:
+      break;
+    default:
       return state;
   }
 
-}
+};
