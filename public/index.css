@@ -22,3 +22,12 @@
     border-right: 1px solid #eee;
   }
 }
+
+#footer {   
+position:fixed;
+   bottom:0px;
+   height:30px;
+   width:100%;
+   left:0px;
+   z-index:9999;
+}

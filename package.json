@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.14.0",
     "compression": "^1.6.1",
     "es6-promise": "^3.2.1",
     "express": "^4.13.4",

@@ -14,7 +14,11 @@
 // )
 
 export const ADD_USER =                     'ADD_USER';
+export const ADD_USERS =                    'ADD_USERS';
 export const EMAIL_CHANGE =                 'EMAIL_CHANGE';
+export const FETCH_USERS_PENDING =          'FETCH_USERS_PENDING';
+export const FETCH_USERS_REJECTED =         'FETCH_USERS_REJECTED';
+export const FETCH_USERS_FULFILLED =        'FETCH_USERS_FULFILLED';
 export const SHOW_USER =                    'SHOW_USER';
 export const SHOWING_USER_CHANGE =          'SHOWING_USER_CHANGE';
 export const LOGIN_USER_REQUEST =           'LOGIN_USER_REQUEST';

@@ -1,9 +1,28 @@
-import { ADD_USER } from '../constants/actionTypes'
+import { ADD_USER, ADD_USERS, FETCH_USERS_FULFILLED, FETCH_USERS_REJECTED } from '../constants/actionTypes'
+import axios from 'axios'
 
 exports.addUser = (user= {  username: '', 
                           email: '',
                           _id: null 
                         }) => ({
     type: ADD_USER,
-    user
+    payload: user
 });
+
+
+exports.addUsers = (users = []) => ({ 
+    type: ADD_USERS,
+    payload: users
+});
+
+export function fetchUsers() {
+  return function(dispatch){
+    axios.get('http://api.newswick.com/api/users?include_docs=true')
+      .then((response) => {
+        dispatch({ type: FETCH_USERS_FULFILLED, payload: response.data })
+      })
+      .catch((err) => {
+        dispatch({ type: FETCH_USERS_REJECTED, payload: err })
+      })
+  }
+}

@@ -1,12 +1,16 @@
 import Footer from "../components/Footer";
-import React from "react";
+import React, { propType } from 'react';
 import Nav from "../components/Nav";
 
 
 export default React.createClass({
   
+  propTypes: {
+    children: React.PropTypes.element.isRequired,
+    location: React.PropTypes.object.isRequired
+  },
                 
-	render() {
+	render: function() {
     const { location } = this.props;
     const containerStyle = {
       marginTop: "60px"
