@@ -6,10 +6,13 @@ import store from './store'
 import Layout from './pages/Layout'
 import Dash from './pages/Dash'
 import Stories from './pages/Stories'
-import UsersListContainer from './pages/UsersListContainer' 
+import ListContainer from './pages/ListContainer' 
 import NoMatch from './pages/NoMatch'
 import axios from 'axios'
+import { purgeUsers } from './actions/userActions'
 
+axios.defaults.baseURL = 'http://api.newswick.com/api';
+  
 const app = document.getElementById('app');
 
 ReactDOM.render(
@@ -17,8 +20,9 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={Layout}>
         <IndexRoute component={Dash} />
-        <Route path="/stories" component={Stories} />
-        <Route path="/users" component={UsersListContainer}/>
+        <Route path="/stories" component={() => (<ListContainer listType="stories"/>)}  />
+        <Route path="/users" component={() => (<ListContainer listType="users"/>)} />
+        <Route path="/groups" component={() => (<ListContainer listType="groups"/>)} />
         <Route path="*" component={NoMatch} />
       </Route>
     </Router>

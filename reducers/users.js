@@ -1,4 +1,4 @@
-import { ADD_USER, ADD_USERS, FETCH_USERS_FULFILLED } from '../constants/actionTypes'
+import { ADD_USER, ADD_USERS, FETCH_USERS_FULFILLED, PURGE_USERS } from '../constants/actionTypes'
 
 export default function users(state={ users:[] }, action) {
   
@@ -17,6 +17,10 @@ export default function users(state={ users:[] }, action) {
     case FETCH_USERS_FULFILLED: {
       const newUsers = action.payload.rows.map(function(user){ return (user.doc) });
       state = {...state, users:state.users.concat(newUsers)}
+      break;
+    }
+    case PURGE_USERS: {
+      state = { ...state, users: [] };
       break;
     }
   }

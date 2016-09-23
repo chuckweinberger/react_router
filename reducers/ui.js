@@ -1,4 +1,4 @@
-import { FETCH_USERS_PENDING, FETCH_USERS_REJECTED, FETCH_USERS_FULFILLED, SHOWING_USER_CHANGE } from '../constants/actionTypes'
+import { FETCH_USERS_PENDING, FETCH_USERS_REJECTED, FETCH_USERS_FULFILLED, SHOWING_ITEM_CHANGE } from '../constants/actionTypes'
 
 const initialState = {
   fetchingUsers: false,
@@ -26,10 +26,10 @@ export default function uiReducer(state = initialState, action) {
       }
       break;
     }
-      case SHOWING_USER_CHANGE:
+      case SHOWING_ITEM_CHANGE:
       return {
         ...state,
-        showingUserId: action.showingUserId
+        showingItemId: action.showingItemId
       };
       break;
     default:

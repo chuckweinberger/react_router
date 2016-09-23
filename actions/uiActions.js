@@ -1,8 +1,8 @@
-import { SHOWING_USER_CHANGE } from '../constants/actionTypes';
+import { SHOWING_ITEM_CHANGE } from '../constants/actionTypes';
 
-exports.showingUserChange = (showingUserId=null) => {
+exports.showingItemChange = (showingItemId=null) => {
   return ({
-    type: SHOWING_USER_CHANGE,
-    showingUserId
+    type: SHOWING_ITEM_CHANGE,
+    showingItemId
   });
 }

@@ -1,11 +1,11 @@
-// components/UserDetails
+// components/StoryDetails
 
 import React from 'react';
 
     
-    const UserDetails = ({ showingItemId }) => (
+    const StoryDetails = ({ showingItemId }) => (
 			<div className={showingItemId ? 'page-header' : 'hidden'}>
-				<h2>Here are the details for user id {showingItemId}.</h2>
+				<h2>Here are the details for story id {showingItemId}.</h2>
         <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder">
               <h4>Label</h4>
@@ -28,4 +28,4 @@ import React from 'react';
 		)
 
   
-  export default UserDetails
+  export default StoryDetails

@@ -1,4 +1,4 @@
-import { ADD_USER, ADD_USERS, FETCH_USERS_FULFILLED, FETCH_USERS_REJECTED } from '../constants/actionTypes'
+import { ADD_USER, ADD_USERS, FETCH_USERS_FULFILLED, FETCH_USERS_REJECTED, PURGE_USERS } from '../constants/actionTypes'
 import axios from 'axios'
 
 exports.addUser = (user= {  username: '', 
@@ -16,8 +16,9 @@ exports.addUsers = (users = []) => ({
 });
 
 export function fetchUsers() {
+  
   return function(dispatch){
-    axios.get('http://api.newswick.com/api/users?include_docs=true')
+    axios.get('/users?include_docs=true')
       .then((response) => {
         dispatch({ type: FETCH_USERS_FULFILLED, payload: response.data })
       })
@@ -25,4 +26,12 @@ export function fetchUsers() {
         dispatch({ type: FETCH_USERS_REJECTED, payload: err })
       })
   }
+}
+
+
+export function purgeUsers() {
+  
+  return ({
+    type: PURGE_USERS
+  });
 }
