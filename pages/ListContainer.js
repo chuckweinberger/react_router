@@ -21,6 +21,13 @@ const mapDispatchToProps = (dispatch) => {
         case "stories": dispatch(purgeStories()); dispatch(fetchStories()); break
         case "groups": dispatch(purgeGroups()); dispatch(fetchGroups()); break
       }
+    },
+    fetchMoreItems: (listType) => {
+      switch(listType){
+        case "users": dispatch(fetchUsers()); break;
+        case "stories": dispatch(fetchStories()); break
+        case "groups": dispatch(fetchGroups()); break
+      }
     }
   }
 }
@@ -30,7 +37,10 @@ const mapStateToProps = (store) => {
     // groups: store.groups.groups,
     stories: store.stories.stories,
     users: store.users.users,
-    showingItemId: store.ui.showingItemId
+    showingItemId: store.ui.showingItemId,
+    totalUsers: store.users.totalRows,
+    totalStories: store.stories.totalRows,
+//    totalGroups: store.groups.totalRows
   }
 }
 
@@ -44,12 +54,12 @@ export default class UsersListContainer extends React.Component {
  
   render(){
   
-    const { users, stories, groups, showingItemId, onItemClick, listType} = this.props;
+    const { users, stories, groups, showingItemId, onItemClick, listType, fetchMoreItems, totalUsers, totalStories, totalGroups} = this.props;
 
     switch(listType){
-      case "users": return(<Users items={users} showingItemId={showingItemId} onItemClick={onItemClick}/>); break;
-      case "groups": return(<Groups items={groups} showingItemId={showingItemId} onItemClick={onItemClick}/>); break;
-      case "stories": return(<Stories items={stories} showingItemId={showingItemId} onItemClick={onItemClick}/>); break;      
+      case "users": return(<Users items={users} showingItemId={showingItemId} onItemClick={onItemClick} totalRows={totalUsers} onFetchMoreItemsClick={fetchMoreItems}/>); break;
+      case "groups": return(<Groups items={groups} showingItemId={showingItemId} onItemClick={onItemClick} totalRows={totalGroups} onFetchMoreItemsClick={fetchMoreItems}/>); break;
+      case "stories": return(<Stories items={stories} showingItemId={showingItemId} onItemClick={onItemClick} totalRows={totalStories} onFetchMoreItemsClick={fetchMoreItems}/>); break;      
     }
   }
 }

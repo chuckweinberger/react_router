@@ -1,6 +1,12 @@
 import { ADD_USER, ADD_USERS, FETCH_USERS_FULFILLED, PURGE_USERS } from '../constants/actionTypes'
 
-export default function users(state={ users:[] }, action) {
+const initialState = {
+  users: [],
+  bookmark: "",
+  totalRows: 0
+}
+
+export default function users(state=initialState, action) {
   
   const generateId = function(){ return Math.random() };
   
@@ -16,11 +22,15 @@ export default function users(state={ users:[] }, action) {
     }
     case FETCH_USERS_FULFILLED: {
       const newUsers = action.payload.rows.map(function(user){ return (user.doc) });
-      state = {...state, users:state.users.concat(newUsers)}
+      state = { ...state, 
+                users:state.users.concat(newUsers), 
+                bookmark: action.payload.bookmark,
+                totalRows: action.payload.total_rows
+              }
       break;
     }
     case PURGE_USERS: {
-      state = { ...state, users: [] };
+      state = initialState;
       break;
     }
   }

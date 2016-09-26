@@ -17,8 +17,8 @@ exports.addUsers = (users = []) => ({
 
 export function fetchUsers() {
   
-  return function(dispatch){
-    axios.get('/users?include_docs=true')
+  return function(dispatch, getState){
+    axios.get(`/users?include_docs=true&bookmark=${getState().users.bookmark}`)
       .then((response) => {
         dispatch({ type: FETCH_USERS_FULFILLED, payload: response.data })
       })

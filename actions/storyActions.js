@@ -4,8 +4,8 @@ import axios from 'axios'
 
 export function fetchStories() {
   
-  return function(dispatch){
-    axios.get('/stories?include_docs=true')
+  return function(dispatch, getState){
+    axios.get('/stories?include_docs=true&bookmark=' + getState().stories.bookmark)
       .then((response) => {
         dispatch({ type: FETCH_STORIES_FULFILLED, payload: response.data })
       })
