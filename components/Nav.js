@@ -22,6 +22,7 @@ export default class Nav extends React.Component {
     const dashClass = location.pathname === "/" ? "active" : "";
     const usersClass = location.pathname.match(/^\/user/) ? "active" : "";
     const storiesClass = location.pathname.match(/^\/stories/) ? "active" : "";
+    const groupsClass = location.pathname.match(/^\/groups/) ? "active" : "";
     const navClass = collapsed ? "collapse" : "";
     
 
@@ -47,6 +48,9 @@ export default class Nav extends React.Component {
               </li>
               <li class={usersClass}>
                 <Link to="users" onClick={this.toggleCollapse.bind(this)}>Users</Link>
+              </li>
+              <li class={groupsClass}>
+                <Link to="groups" onClick={this.toggleCollapse.bind(this)}>Groups</Link>
               </li>
       
             </ul>

@@ -1,11 +1,11 @@
-// components/Stories.js
+// components/Groups.js
 
 import React, { propType } from 'react'
-import Story from './Story'
-import StoryDetails from './StoryDetails'
+import Group from './Group'
+import GroupDetails from './GroupDetails'
 
 
-export default class Stories extends React.Component {
+export default class Groups extends React.Component {
   render(){
     
     const { items, showingItemId, onItemClick, totalRows, onFetchMoreItemsClick} = this.props;
@@ -13,20 +13,20 @@ export default class Stories extends React.Component {
     return (
       <div>
         <div className='col-sm-3 col-md-2 sidebar'>
-          <h2>List of Stories</h2>
+          <h2>List of Groups</h2>
           <ul>
             {items.map(item => 
               <li key={item._id}>
-                <Story {...item}
+                <Group {...item}
                       onClick={() => onItemClick(item._id)}
                 />
               </li>
           )}
       	  </ul>
-          { items.length < totalRows && <button type="button" onClick={() => onFetchMoreItemsClick("stories")}>Fetch More</button> }
+          { items.length < totalRows && <button type="button" onClick={() => onFetchMoreItemsClick("groups")}>Fetch More</button> }
         </div>
         <div className='col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main'>
-          <StoryDetails showingItemId={ showingItemId } />
+          <GroupDetails showingItemId={ showingItemId } />
         </div>
       </div>
       

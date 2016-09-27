@@ -5,9 +5,11 @@ import { connect } from 'react-redux'
 
 import Users from '../components/Users'
 import Stories from '../components/Stories'
+import Groups from '../components/Groups'
 import { showingItemChange } from '../actions/uiActions'
 import { fetchUsers, purgeUsers } from '../actions/userActions'
 import { fetchStories, purgeStories } from '../actions/storyActions'
+import { fetchGroups, purgeGroups } from '../actions/groupActions'
 
 const mapDispatchToProps = (dispatch) => {
   return{
@@ -34,13 +36,13 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (store) => {
   return{
-    // groups: store.groups.groups,
+    groups: store.groups.groups,
     stories: store.stories.stories,
     users: store.users.users,
     showingItemId: store.ui.showingItemId,
     totalUsers: store.users.totalRows,
     totalStories: store.stories.totalRows,
-//    totalGroups: store.groups.totalRows
+    totalGroups: store.groups.totalRows
   }
 }
 

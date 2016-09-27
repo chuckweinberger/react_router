@@ -4,6 +4,7 @@ import users from './users'
 
 import currentUser from './currentUser'
 import auth from './auth'
+import groups from './groups'
 import ui from './ui'
 
 export default combineReducers({
@@ -11,5 +12,6 @@ export default combineReducers({
   stories,
   currentUser,
   auth,
-  ui
+  ui,
+  groups
 })
