@@ -5,23 +5,32 @@ import Story from './Story'
 import StoryDetails from './StoryDetails'
 
 
-export default ({ items, showingItemId, onItemClick, onFetchMoreItemsClick}) => (
-  <div>
-    <div className='col-sm-3 col-md-2 sidebar'>
-      <h2>List of Stories</h2>
-      <ul>
-        {items.map(story => 
-          <li key={story._id}>
-            <Story {...story}
-                  onClick={() => onItemClick(story._id)}
-            />
-          </li>
-      )}
-		  </ul>
-      <button type="button" onClick={() => onFetchMoreItemsClick("stories")}>Fetch More</button>
-    </div>
-    <div className='col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main'>
-      <StoryDetails showingItemId={ showingItemId } />
-    </div>
-  </div>
-)
+export default class Stories extends React.Component {
+  render(){
+    
+    const { items, showingItemId, onItemClick, totalRows, onFetchMoreItemsClick} = this.props;
+    
+    return (
+      <div>
+        <div className='col-sm-3 col-md-2 sidebar'>
+          <h2>List of Stories</h2>
+          <ul>
+            {items.map(item => 
+              <li key={item._id}>
+                <Story {...item}
+                      onClick={() => onItemClick(item._id)}
+                />
+              </li>
+          )}
+      	  </ul>
+          { items.length < totalRows && <button type="button" onClick={() => onFetchMoreItemsClick("stories")}>Fetch More</button> }
+        </div>
+        <div className='col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main'>
+          <StoryDetails showingItemId={ showingItemId } />
+        </div>
+      </div>
+      
+    ) 
+  }
+}
+
