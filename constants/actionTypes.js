@@ -16,6 +16,8 @@
 export const ADD_USER =                     'ADD_USER';
 export const ADD_USERS =                    'ADD_USERS';
 export const EMAIL_CHANGE =                 'EMAIL_CHANGE';
+export const END_FETCHING =                 'END_FETCHING';
+export const FETCHING =                     'FETCHING';
 export const FETCH_GROUPS_FULFILLED =       'FETCH_GROUPS_FULFILLED';
 export const FETCH_GROUPS_PENDING =         'FETCH_GROUPS_PENDING';
 export const FETCH_GROUPS_REJECTED =        'FETCH_GROUPS_REJECTED';
