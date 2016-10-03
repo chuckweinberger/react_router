@@ -1,20 +1,9 @@
-// import { createConstants } from '../utils';
-
-// export default createConstants(
-//   'ADD_USER',
-//   'EMAIL_CHANGE',
-//   'SHOW_USER',
-//   'SHOW_USER_DETAILS',
-//   'LOGIN_USER_REQUEST',
-//   'LOGIN_USER_FAILURE',
-//   'LOGIN_USER_SUCCESS',
-//   'LOGOUT_USER',
-//   'FETCH_PROTECTED_DATA_REQUEST',
-//   'RECEIVE_PROTECTED_DATA'
-// )
+//constants/actionTypes.js
 
 export const ADD_USER =                     'ADD_USER';
 export const ADD_USERS =                    'ADD_USERS';
+export const CURRENT_USER_LOGGED_IN =       'CURRENT_USER_LOGGED_IN';
+export const CURRENT_USER_LOGGED_OUT =      'CURRENT_USER_LOGGED_OUT';
 export const EMAIL_CHANGE =                 'EMAIL_CHANGE';
 export const END_FETCHING =                 'END_FETCHING';
 export const FETCHING =                     'FETCHING';

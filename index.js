@@ -2,14 +2,17 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Router, Route, browserHistory, IndexRoute} from 'react-router'
 import { Provider } from 'react-redux'
-// import store from './store'
+
+//necessary components and pages
+import Login from './components/Login'
 import Layout from './pages/Layout'
 import Dash from './pages/Dash'
 import Stories from './pages/Stories'
 import ListContainer from './pages/ListContainer' 
 import NoMatch from './pages/NoMatch'
+
+import { UserIsAuthenticated, UserIsAdmin } from './utils/wrappers.js'
 import axios from 'axios'
-import { purgeUsers } from './actions/userActions'
 
 import { applyMiddleware, createStore, compose } from "redux"
 import logger from "redux-logger"
@@ -26,9 +29,9 @@ axios.defaults.baseURL = 'http://api.newswick.com/api';
 
 const app = document.getElementById('app');
 const baseHistory = browserHistory
-//const middleware = applyMiddleware(promise(), thunk, logger())
 const routingMiddleware = routerMiddleware(baseHistory)
 
+//dock for displaying actions and the store in development mode
 const DevTools = createDevTools(
   <DockMonitor toggleVisibilityKey="ctrl-h"
                changePositionKey="ctrl-q">
@@ -37,7 +40,6 @@ const DevTools = createDevTools(
 )
 
 const enhancer = compose(
-  // Middleware you want to use in development:
   applyMiddleware(routingMiddleware, promise(), thunk),
   DevTools.instrument()
 )
@@ -51,9 +53,10 @@ ReactDOM.render(
       <Router history={history}>
         <Route path="/" component={Layout}>
           <IndexRoute component={Dash} />
-          <Route path="/stories" component={() => (<ListContainer listType="stories"/>)}  />
-          <Route path="/users" component={() => (<ListContainer listType="users"/>)} />
-          <Route path="/groups" component={() => (<ListContainer listType="groups"/>)} />
+          <Route path="login" component={Login}/>
+          <Route path="/stories" component={ () => (<ListContainer listType="stories"/>) } />
+          <Route path="/users" component={ () => (<ListContainer listType="users"/>) } />
+          <Route path="/groups" component={ UserIsAuthenticated(() => (<ListContainer listType="groups"/>)) } />
           <Route path="*" component={NoMatch} />
         </Route>
       </Router>
