@@ -1,4 +1,4 @@
-import { EMAIL_CHANGE, USERNAME_CHANGE, CURRENT_USER_LOGGED_IN, CURRENT_USER_LOGGED_OUT } from '../constants/actionTypes';
+import { EMAIL_CHANGE, USERNAME_CHANGE, CURRENT_USER_LOGGED_IN, CURRENT_USER_LOGGED_OUT, CURRENT_USER_LOGGING_IN, CURRENT_USER_LOGGING_OUT } from '../constants/actionTypes';
 
 exports.emailChange = (email='') => ({
     type: EMAIL_CHANGE,
@@ -10,16 +10,32 @@ exports.usernameChange = (username='') => ({
     username
 });
 
-export function login(data) {
-  //to-do: need to perform login api call and if accepted call the currentUser reducer to update the store
-  return {
-    type: CURRENT_USER_LOGGED_IN,
-    payload: data
-  }
+export const login = data => dispatch => {
+  
+  dispatch({
+    type: CURRENT_USER_LOGGING_IN
+  })
+  setTimeout(() => {
+    dispatch({
+      type: CURRENT_USER_LOGGED_IN,
+      payload: data
+    })
+  }, 2000)
 }
 
-export function logout() {
-  return {
-    type: CURRENT_USER_LOGGED_OUT
-  }
-}
+exports.logout = () => ({
+  
+  type: CURRENT_USER_LOGGED_OUT,
+  payload: {}
+  
+})
+// export const logout = () => dispatch => {
+//   dispatch({
+//     type: CURRENT_USER_LOGGED_OUT
+//   })
+//   setTimeout(() => {
+//     dispatch({
+//       type: CURRENT_USER_LOGGED_OUT
+//     })
+//   }, 2000)
+// }

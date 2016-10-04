@@ -1,9 +1,21 @@
 
 import { IndexLink, Link } from 'react-router'
 import NavLink from '../components/NavLink'
-import React from "react";
+import React from "react"
+import { logout } from '../actions/currentUserActions'
+import { connect } from 'react-redux'
+
+const mapStateToProps = (store) => {
+  return{
+    currentUser: store.currentUser
+  }
+}
+  
+@connect(mapStateToProps, { logout })
 
 export default class Nav extends React.Component {
+  
+
   constructor() {
     super()
     this.state = {
@@ -17,14 +29,13 @@ export default class Nav extends React.Component {
   }
 
   render() {
-    const { location } = this.props;
-    const { collapsed } = this.state;
-    const dashClass = location.pathname === "/" ? "active" : "";
-    const usersClass = location.pathname.match(/^\/user/) ? "active" : "";
-    const storiesClass = location.pathname.match(/^\/stories/) ? "active" : "";
-    const groupsClass = location.pathname.match(/^\/groups/) ? "active" : "";
-    const navClass = collapsed ? "collapse" : "";
-    
+    const { currentUser, location, logout } = this.props;
+    const { collapsed } = this.state
+    const dashClass = location.pathname === "/" ? "active" : ""
+    const usersClass = location.pathname.match(/^\/user/) ? "active" : ""
+    const storiesClass = location.pathname.match(/^\/stories/) ? "active" : ""
+    const groupsClass = location.pathname.match(/^\/groups/) ? "active" : ""
+    const navClass = collapsed ? "collapse" : ""    
 
     return (
       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -54,6 +65,7 @@ export default class Nav extends React.Component {
               </li>
       
             </ul>
+            <button className={currentUser.auth.loggedIn ? 'test' : 'hidden'} onClick={() => logout()}>Logout</button>
           </div>
         </div>
       </nav>
