@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { login } from '../actions/currentUserActions'
 
 function select(state, ownProps) {
-  const isAuthenticated = state.currentUser.auth.loggedIn || false
+  const isAuthenticated = (state.currentUser.currentUser && state.currentUser.currentUser.loggedIn) || false
   const redirect = ownProps.location.query.redirect || '/'
   return {
     isAuthenticated,
@@ -39,7 +39,7 @@ class LoginContainer extends Component {
     onClick = (e) => {
       e.preventDefault()
       this.props.login({
-        name: this.refs.name.value,
+        username: this.refs.username.value,
         password: this.refs.password.value,
         isAdmin: this.refs.admin.checked
       })
@@ -48,8 +48,8 @@ class LoginContainer extends Component {
     render() {
       return (
         <div>
-          <h2>Enter your name</h2>
-          <input type="text" ref="name" />
+          <h2>Enter your username</h2>
+          <input type="text" ref="username" />
           <br/>
           <h2>Enter your password</h2>
           <input type="password" ref="password" />

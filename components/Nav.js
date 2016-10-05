@@ -63,9 +63,11 @@ export default class Nav extends React.Component {
               <li class={groupsClass}>
                 <Link to="groups" onClick={this.toggleCollapse.bind(this)}>Groups</Link>
               </li>
-      
+              <li>
+                <button className={(currentUser.currentUser && currentUser.currentUser.loggedIn) ? 'test' : 'hidden'} onClick={() => logout(currentUser)}>Logout</button>
+              </li>
             </ul>
-            <button className={currentUser.auth.loggedIn ? 'test' : 'hidden'} onClick={() => logout()}>Logout</button>
+         
           </div>
         </div>
       </nav>

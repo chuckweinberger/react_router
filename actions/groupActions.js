@@ -1,4 +1,4 @@
-import { END_FETCHING, FETCHING, FETCH_GROUP_FULFILLED, FETCH_GROUP_REJECTED, FETCH_GROUPS_REJECTED, PURGE_GROUPS } from '../constants/actionTypes'
+import { END_FETCHING, FETCHING, FETCH_GROUPS_FULFILLED, FETCH_GROUPS_REJECTED, PURGE_GROUPS } from '../constants/actionTypes'
 import axios from 'axios'
 
 

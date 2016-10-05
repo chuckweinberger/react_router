@@ -1,7 +1,6 @@
-import { CURRENT_USER_LOGGED_IN, CURRENT_USER_LOGGED_OUT, CURRENT_USER_LOGGING_IN, CURRENT_USER_LOGGING_OUT, EMAIL_CHANGE, USERNAME_CHANGE, SHOW_USER_DETAILS } from '../constants/actionTypes'
+import * as actions  from '../constants/actionTypes'
 
 const initialState = {
-  auth: {} ,
   currentUser: null,
   isLoading:false
 }
@@ -10,23 +9,34 @@ export default function uiReducer(state=initialState, action) {
   let modifiedUser = {}
   
   switch (action.type) {
-  case CURRENT_USER_LOGGED_IN:
-    return { ...state, auth: { loggedIn: true }, currentUser: action.payload, isLoading: false }
+  case actions.CURRENT_USER_RESTORE_FROM_LOCAL_STORAGE:
+    action.payload.loggedIn = true;
+    return { ...state, currentUser: action.payload, isLoading: false }
     break;
-  case CURRENT_USER_LOGGED_OUT:
+  case actions.CURRENT_USER_LOGGED_IN:
+    action.payload.loggedIn = true;
+    return { ...state, currentUser: action.payload, isLoading: false }
+    break;
+  case actions.CURRENT_USER_LOGGED_OUT:
     return initialState
     break;
-  case CURRENT_USER_LOGGING_IN:
+  case actions.CURRENT_USER_LOGGING_IN:
     return { ...state, isLoading: true }
     break;
-  case CURRENT_USER_LOGGING_OUT:
+  case actions.CURRENT_USER_LOGGING_OUT:
     return { ...state, isLoading: true }
     break;
-  case EMAIL_CHANGE:
+  case actions.CURRENT_USER_LOGIN_FAILURE:
+    return { ...state, isLoading: false }
+    break;
+  case actions.CURRENT_USER_LOGOUT_FAILURE:
+    return { ...state, isLoading: false }
+    break;
+  case actions.EMAIL_CHANGE:
     modifiedUser = { ...state.currentUser, email: action.payload }
     return { ...state, modifiedUser };
     break;
-  case USERNAME_CHANGE:
+  case actions.USERNAME_CHANGE:
     modifiedUser = { ...state.currenUser, username: action.payload }
     return { ...state, modifiedUser };
     break;
