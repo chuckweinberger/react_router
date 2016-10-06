@@ -9,10 +9,10 @@ export default function uiReducer(state=initialState, action) {
   let modifiedUser = {}
   
   switch (action.type) {
-  case actions.CURRENT_USER_RESTORE_FROM_LOCAL_STORAGE:
-    action.payload.loggedIn = true;
-    return { ...state, currentUser: action.payload, isLoading: false }
-    break;
+  // case actions.CURRENT_USER_RESTORE_FROM_LOCAL_STORAGE:
+  //   action.payload.loggedIn = true;
+  //   return { ...state, currentUser: action.payload, isLoading: false }
+  //   break;
   case actions.CURRENT_USER_LOGGED_IN:
     action.payload.loggedIn = true;
     return { ...state, currentUser: action.payload, isLoading: false }

@@ -12,17 +12,21 @@ import ListContainer from './pages/ListContainer'
 import NoMatch from './pages/NoMatch'
 
 //necessary actions
-import { restore } from './actions/currentUserActions'
+import { restoreCurrentUser } from './actions/currentUserActions'
 
-import { UserIsAuthenticated, UserIsAdmin } from './utils/wrappers.js'
+//settings for authoorization/authentication service: redux-auth-service
+import { UserIsAuthenticated, UserIsAdmin } from './utils/wrappers'
+
 import axios from 'axios'
 
+//middleware
 import { applyMiddleware, createStore, compose } from "redux"
 import logger from "redux-logger"
 import promise from "redux-promise-middleware"
 import reducer from "./reducers"
 import thunk from "redux-thunk"
 
+//devtools and history trackers
 import { createDevTools } from 'redux-devtools'
 import LogMonitor from 'redux-devtools-log-monitor'
 import DockMonitor from 'redux-devtools-dock-monitor'
@@ -48,22 +52,11 @@ const enhancer = compose(
 const store = createStore(reducer, enhancer)
 const history = syncHistoryWithStore(baseHistory, store)
 
-//attempt to restore the currentUser from localStorage
-store.dispatch(restore);
-
-//set defaults for REST service
+//set default URL for REST-based service
 axios.defaults.baseURL = 'http://api.newswick.com/api';
-axios.interceptors.request.use(function(config) {
-  const currentUser = JSON.parse(localStorage.getItem('currentUser'))
-  if(currentUser){
-    console.log("adding the currentUser's access token to http header requests");
-    config.headers.common['Authorization'] = "Bearer " + currentUser.auth.accessToken.token ;
-  } else {
-    config.headers.common['Authorization'] = null;
-    console.log("removing access token as we don't have a logged-in user");
-  }
-  return config;
-})
+
+//attempt to restore the currentUser from localStorage
+store.dispatch(restoreCurrentUser)
 
 ReactDOM.render(
   <Provider store={store}>
