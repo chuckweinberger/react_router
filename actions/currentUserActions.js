@@ -62,4 +62,14 @@ export const restoreCurrentUser = dispatch => {
 };
 
   
-// }
+export const createNewAccount = (data) => dispatch => {
+  
+  dispatch({
+    type: actions.CREATE_ACCOUNT,
+    payload: axios.post('/users', { user: data })
+  }).then(({ value, action }) => {
+    localStorage.setItem('currentUser', JSON.stringify(value.data));
+    insertAuthToken(value.data);
+  })
+
+}

@@ -4,12 +4,14 @@ import { Router, Route, browserHistory, IndexRoute} from 'react-router'
 import { Provider } from 'react-redux'
 
 //necessary components and pages
+import CreateAccount from './components/CreateAccount'
 import Login from './components/Login'
 import Layout from './pages/Layout'
 import Dash from './pages/Dash'
 import Stories from './pages/Stories'
 import ListContainer from './pages/ListContainer' 
 import NoMatch from './pages/NoMatch'
+
 
 //necessary actions
 import { restoreCurrentUser } from './actions/currentUserActions'
@@ -68,6 +70,7 @@ ReactDOM.render(
           <Route path="/stories" component={ () => (<ListContainer listType="stories"/>) } />
           <Route path="/users" component={ () => (<ListContainer listType="users"/>) } />
           <Route path="/groups" component={ UserIsAuthenticated(() => (<ListContainer listType="groups"/>)) } />
+          <Route path="create_account" component={CreateAccount} />
           <Route path="*" component={NoMatch} />
         </Route>
       </Router>

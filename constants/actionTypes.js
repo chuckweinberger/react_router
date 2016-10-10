@@ -2,6 +2,10 @@
 
 export const ADD_USER =                     'ADD_USER';
 export const ADD_USERS =                    'ADD_USERS';
+export const CREATE_ACCOUNT =               'CREATE_ACCOUNT';
+export const CREATE_ACCOUNT_FULFILLED =     'CREATE_ACCOUNT_FULFILLED';
+export const CREATE_ACCOUNT_PENDING =       'CREATE_ACCOUNT_PENDING';
+export const CREATE_ACCOUNT_REJECTED =      'CREATE_ACCOUNT_REJECTED';
 export const CURRENT_USER_LOGGED_IN =       'CURRENT_USER_LOGGED_IN';
 export const CURRENT_USER_LOGGED_OUT =      'CURRENT_USER_LOGGED_OUT';
 export const CURRENT_USER_LOGGING_IN =      'CURRENT_USER_LOGGING_IN';

@@ -1,8 +1,7 @@
 
 import { IndexLink, Link } from 'react-router'
-import NavLink from '../components/NavLink'
 import React from "react"
-import { logout } from '../actions/currentUserActions'
+import { logout, login } from '../actions/currentUserActions'
 import { connect } from 'react-redux'
 
 const mapStateToProps = (store) => {
@@ -11,7 +10,7 @@ const mapStateToProps = (store) => {
   }
 }
   
-@connect(mapStateToProps, { logout })
+@connect(mapStateToProps, { logout, login })
 
 export default class Nav extends React.Component {
   
@@ -26,6 +25,14 @@ export default class Nav extends React.Component {
   toggleCollapse() {
     const collapsed = !this.state.collapsed;
     this.setState({collapsed});
+  }
+  
+  loginClick = (e) => {
+    e.preventDefault()
+    this.props.login({
+      username: this.refs.username.value,
+      password: this.refs.password.value
+    })
   }
 
   render() {
@@ -63,11 +70,19 @@ export default class Nav extends React.Component {
               <li class={groupsClass}>
                 <Link to="groups" onClick={this.toggleCollapse.bind(this)}>Groups</Link>
               </li>
-              <li>
-                <button className={(currentUser.currentUser && currentUser.currentUser.loggedIn) ? 'test' : 'hidden'} onClick={() => logout(currentUser)}>Logout</button>
-              </li>
             </ul>
-         
+      
+            <form className={(currentUser.currentUser && currentUser.currentUser.loggedIn) ? 'hidden' : 'navbar-form navbar-right'}>
+              <div class="form-group">
+                <input type="text" placeholder="Username" class="form-control" ref="username"/>
+                <input type="password" placeholder="Password" class="form-control" ref="password"/>
+                <input type="submit" value="Login" class="btn btn-default" onClick={this.loginClick}/>
+                <Link to="create_account">New Account</Link>
+              </div>
+            </form>
+            <span>
+              <button className={(currentUser.currentUser && currentUser.currentUser.loggedIn) ? 'navbar-form navbar-right' : 'hidden'} onClick={() => logout(currentUser)}>Logout</button>
+            </span>
           </div>
         </div>
       </nav>

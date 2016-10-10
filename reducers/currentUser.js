@@ -32,6 +32,16 @@ export default function uiReducer(state=initialState, action) {
   case actions.CURRENT_USER_LOGOUT_FAILURE:
     return { ...state, isLoading: false }
     break;
+  case actions.CREATE_ACCOUNT_PENDING:
+    return { ...state, isLoading: true }
+    break;
+  case actions.CREATE_ACCOUNT_REJECTED:
+    return { ...state, isLoading: false }
+    break;
+  case actions.CREATE_ACCOUNT_FULFILLED:
+    action.payload.loggedIn = true;
+    return { ...state, currentUser: action.payload, isLoading: false, }
+    break;
   case actions.EMAIL_CHANGE:
     modifiedUser = { ...state.currentUser, email: action.payload }
     return { ...state, modifiedUser };
