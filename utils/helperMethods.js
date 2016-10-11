@@ -15,6 +15,7 @@ export function createConstants(...constants) {
     }, {});
 }
 
+//confirms that a given authToken is still being accepted by the server
 export function checkValidityOfToken(token){
 
   return new Promise(function(resolve, reject){
@@ -35,6 +36,7 @@ export function checkValidityOfToken(token){
   })
 }
 
+//takes an existing user and udpates his/her authToken with the server
 export function updateAuthToken(currentUser){
   
   return new Promise(function(resolve, reject){
@@ -55,6 +57,7 @@ export function updateAuthToken(currentUser){
   })
 }
 
+//add a header into all http requests that contains the authToken
 export function insertAuthToken(currentUser){
   //add authentication header to axios default headers
   authInterceptor = axios.interceptors.request.use(function(config) {

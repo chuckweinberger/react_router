@@ -54,7 +54,7 @@ export const restoreCurrentUser = dispatch => {
         updateAuthToken(localStorageUser)
          .then((response) => {
             localStorageUser.auth.accessToken = response;
-            localStorage.setItem("currentUser", localStorageUser)
+            localStorage.setItem("currentUser", JSON.stringify(localStorageUser));
             insertAuthToken(localStorageUser);
             dispatch({ type: actions.CURRENT_USER_LOGIN_FULFILLED, payload: localStorageUser });
           });  
