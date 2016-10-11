@@ -2,7 +2,7 @@
 
 import * as actions from '../constants/actionTypes'
 import axios from 'axios'
-import { authTokenAccepted, insertAuthToken, removeAuthToken } from '../utils/helperMethods'
+import { checkValidityOfToken, insertAuthToken, removeAuthToken, updateAuthToken } from '../utils/helperMethods'
 
 export const login = data => dispatch => {
 
@@ -36,6 +36,8 @@ export const logout = (data) => dispatch => {
     })  
 }
 
+//get currentUser data stored in local storage and then test the currentUser's auth token for validity
+//If still valid, update the auth token and log-in the currentUser with the new auth token
 export const restoreCurrentUser = dispatch => {
   
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -44,16 +46,18 @@ export const restoreCurrentUser = dispatch => {
                   localStorageUser.auth.accessToken && 
                   localStorageUser.auth.accessToken.token;
                   
-    if(token){
-//create a axios instance on which we can set a one-team auth header.
-      let instance = axios.create({
-        baseURL: 'http://api.newswick.com/api',
-        headers: { 'Authorization': 'Bearer ' + token }
-      });
-      instance('/logins?access_token=' + token)
+
+    if (token){
+      checkValidityOfToken(token)
       .then((response) => {
-        insertAuthToken(localStorageUser)
-        dispatch({ type: actions.CURRENT_USER_LOGIN_FULFILLED, payload: localStorageUser })
+        insertAuthToken(localStorageUser);
+        updateAuthToken(localStorageUser)
+         .then((response) => {
+            localStorageUser.auth.accessToken = response;
+            localStorage.setItem("currentUser", localStorageUser)
+            insertAuthToken(localStorageUser);
+            dispatch({ type: actions.CURRENT_USER_LOGIN_FULFILLED, payload: localStorageUser });
+          });  
       })
       .catch((error) => {
         localStorage.removeItem('currentUser');

@@ -15,22 +15,44 @@ export function createConstants(...constants) {
     }, {});
 }
 
-export function authTokenAccepted(token){
-  console.log("now in checkauthtoken function");
+export function checkValidityOfToken(token){
+
+  return new Promise(function(resolve, reject){
   
-  //to-do: check validity of the access token
-  axios.get('', {
-    params: { access_token: token}
+    if(typeof(token) === "undefined") reject("No Token Provided")
+
+      axios.get('', {
+        params: { access_token: token}
+      })
+      .then(response => {
+        console.log("Access token was checked against server and found to still be valid");
+        resolve(response)
+      })
+      .catch(error => {
+        console.log("Access token was checked against server and found to be invalid");
+        reject(error)
+      })
   })
-  .then(response => {
-    console.log("Access token was checked against server and found to still be valid");
-    return true
-  })
-  .catch(error => {
-    console.log("Access token was checked against server and found to be invalid");
-    return false
-  })
+}
+
+export function updateAuthToken(currentUser){
   
+  return new Promise(function(resolve, reject){
+  
+    const token = currentUser && currentUser.auth && currentUser.auth.accessToken && currentUser.auth.accessToken.token;
+    
+    if( !token ) reject("No Token Provided")
+    
+      axios.put('/logins/' + token)
+      .then(response => {
+        console.log("Access token was updated");
+        resolve(response.data)
+      })
+      .catch(error => {
+        console.log("Access token failed to update due to " + error);
+        reject(error)
+      })
+  })
 }
 
 export function insertAuthToken(currentUser){
