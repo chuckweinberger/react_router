@@ -2,20 +2,24 @@
 
 import * as actions from '../constants/actionTypes'
 import axios from 'axios'
-import { checkValidityOfToken, insertAuthToken, removeAuthToken, updateAuthToken } from '../utils/helperMethods'
+// import { checkValidityOfToken } from '../utils/helperMethods'
+import { deleteAccessToken, setAccessToken, updateAccessToken } from './authActions'
 
 export const login = data => dispatch => {
 
 //although I want to use redux-promise-middleware for this asynch action, I can't because it auto dispatches the CURRENT_USER_LOGIN_FULLFILLED prior to my inserting the auth token from that newly logged-in user.  I need to insert the auth-token header prior to mounting any component that needs the auth token to fetch data needed by that component.
-  
+
+  dispatch({ type: actions.CURRENT_USER_LOGIN_PENDING, payload: {} });
   axios.post('/logins', { user: data.username, password: data.password }
             ).then((response) => {
+                    const accessToken = response.data.auth.accessToken;
+                    delete response.data.auth;
                     localStorage.setItem('currentUser', JSON.stringify(response.data));
-                    insertAuthToken(response.data);
+                    setAccessToken(accessToken, dispatch);
                     dispatch({ type: actions.CURRENT_USER_LOGIN_FULFILLED, payload: response.data })
             }) 
             .catch((err) => {
-               dispatch({ type: actions.CURRENT_USER_LOGIN_FAILURE, payload: err });
+               dispatch({ type: actions.CURRENT_USER_LOGIN_REJECTED, payload: err });
             })
 }
 
@@ -27,40 +31,31 @@ export const logout = (data) => dispatch => {
   axios.delete('/logins/' + data.currentUser._id )
     .then(() => {
       localStorage.removeItem('currentUser');
-      removeAuthToken();
-      dispatch({ type: actions.CURRENT_USER_LOGOUT_FULFILLED })
+      deleteAccessToken(dispatch);
+      dispatch({ type: actions.CURRENT_USER_LOGOUT_FULFILLED });
+      dispatch({ type: actions.END_FETCHING });
     }) 
     .catch((err) => {
-      dispatch({ type: actions.CURRENT_USER_LOGOUT_REJECTED, payload: err })
-      dispatch({ type: actions.END_FETCHING })
+      dispatch({ type: actions.CURRENT_USER_LOGOUT_REJECTED, payload: err });
+      dispatch({ type: actions.END_FETCHING });
     })  
 }
 
-//get currentUser data stored in local storage and then test the currentUser's auth token for validity
-//If still valid, update the auth token and log-in the currentUser with the new auth token
+//get currentUser data stored in local storage and then test the currentUser's auth token for validity and set the HTTP header
 export const restoreCurrentUser = dispatch => {
   
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
-    const token = localStorageUser && 
-                  localStorageUser.auth && 
-                  localStorageUser.auth.accessToken && 
-                  localStorageUser.auth.accessToken.token;
+    const accessToken = JSON.parse(localStorage.getItem('accessToken'));
+    const token = accessToken && accessToken.token;
                   
-
     if (token){
-      checkValidityOfToken(token)
+      updateAccessToken(token, dispatch)//updates token and sets the http header.  also sets a timer to trigger future updateAccessTokens 
       .then((response) => {
-        insertAuthToken(localStorageUser);
-        updateAuthToken(localStorageUser)
-         .then((response) => {
-            localStorageUser.auth.accessToken = response;
-            localStorage.setItem("currentUser", JSON.stringify(localStorageUser));
-            insertAuthToken(localStorageUser);
-            dispatch({ type: actions.CURRENT_USER_LOGIN_FULFILLED, payload: localStorageUser });
-          });  
+        dispatch({ type: actions.CURRENT_USER_LOGIN_FULFILLED, payload: localStorageUser });
       })
       .catch((error) => {
         localStorage.removeItem('currentUser');
+        localStorage.removeItem('accessToken');
         return false
       }) 
 
@@ -75,7 +70,31 @@ export const createNewAccount = (data) => dispatch => {
     payload: axios.post('/users', { user: data })
   }).then(({ value, action }) => {
     localStorage.setItem('currentUser', JSON.stringify(value.data));
-    insertAuthToken(value.data);
+    setAccessToken(value.data.auth.accessToken, dispatch);
   })
 
 }
+
+// export const update = ({ data, persist }) => dispatch => {
+//
+//   if (persist) {
+//     dispatch({  key: action.CURRENT_USER_UPDATE,
+//                 payload: axios.post()
+//             })
+//             .then(({ value, action }) => {
+//
+//               localStorage.setItem('currentUser', JSON.stringify(value.data));
+//
+//             })
+//   } else {
+//     dispatch({  key: action.CURRENT_USER_UPDATE_FULFILLED,
+//                 payload: data
+//             })
+//   }
+//
+// }
+
+
+      
+  
+

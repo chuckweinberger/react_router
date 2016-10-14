@@ -1,13 +1,12 @@
 import * as actions  from '../constants/actionTypes'
+import { cloneDeep } from 'lodash'
 
 const initialState = {
   currentUser: null,
   isLoading:false,
   error: null
 }
-export default function uiReducer(state=initialState, action) {
-  
-  let modifiedUser = {}
+export default function currentUser(state=initialState, action) {
   
   switch (action.type) {
   case actions.CURRENT_USER_RESTORE_FROM_LOCAL_STORAGE:
@@ -43,6 +42,7 @@ export default function uiReducer(state=initialState, action) {
   case actions.CREATE_ACCOUNT_REJECTED:
     return { ...state, isLoading: false, error: action.payload }
     break;
+
   default:
     return state;
     break;
