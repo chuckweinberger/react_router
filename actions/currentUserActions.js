@@ -2,7 +2,6 @@
 
 import * as actions from '../constants/actionTypes'
 import axios from 'axios'
-// import { checkValidityOfToken } from '../utils/helperMethods'
 import { deleteAccessToken, setAccessToken, updateAccessToken } from './authActions'
 
 export const login = data => dispatch => {
@@ -12,10 +11,8 @@ export const login = data => dispatch => {
   dispatch({ type: actions.CURRENT_USER_LOGIN_PENDING, payload: {} });
   axios.post('/logins', { user: data.username, password: data.password }
             ).then((response) => {
-                    const accessToken = response.data.auth.accessToken;
-                    delete response.data.auth;
+                    setAccessToken(response.data, dispatch);
                     localStorage.setItem('currentUser', JSON.stringify(response.data));
-                    setAccessToken(accessToken, dispatch);
                     dispatch({ type: actions.CURRENT_USER_LOGIN_FULFILLED, payload: response.data })
             }) 
             .catch((err) => {
@@ -45,17 +42,15 @@ export const logout = (data) => dispatch => {
 export const restoreCurrentUser = dispatch => {
   
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
-    const accessToken = JSON.parse(localStorage.getItem('accessToken'));
-    const token = accessToken && accessToken.token;
+    const accessToken = localStorageUser && localStorageUser.auth && localStorageUser.auth.accessToken; 
                   
-    if (token){
-      updateAccessToken(token, dispatch)//updates token and sets the http header.  also sets a timer to trigger future updateAccessTokens 
+    if (accessToken){
+      updateAccessToken(localStorageUser, dispatch)//updates token and sets the http header.  also sets a timer to trigger future updateAccessTokens 
       .then((response) => {
         dispatch({ type: actions.CURRENT_USER_LOGIN_FULFILLED, payload: localStorageUser });
       })
       .catch((error) => {
         localStorage.removeItem('currentUser');
-        localStorage.removeItem('accessToken');
         return false
       }) 
 
@@ -68,9 +63,9 @@ export const createNewAccount = (data) => dispatch => {
   dispatch({
     type: actions.CREATE_ACCOUNT,
     payload: axios.post('/users', { user: data })
-  }).then(({ value, action }) => {
-    localStorage.setItem('currentUser', JSON.stringify(value.data));
-    setAccessToken(value.data.auth.accessToken, dispatch);
+  }).then(({ response, action }) => {
+    localStorage.setItem('currentUser', JSON.stringify(response.data));
+    setAccessToken(response.data, dispatch);
   })
 
 }
