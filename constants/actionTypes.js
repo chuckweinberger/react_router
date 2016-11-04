@@ -1,7 +1,7 @@
 //constants/actionTypes.js
 export const ACCESS_TOKEN_UPDATE =              'ACCESS_TOKEN_UPDATE';
-export const ACCESS_TOKEN_UPDATE_PENDING =      'ACCESS_TOKEN_UPDATE_PENDING';
 export const ACCESS_TOKEN_UPDATE_FULFILLED =    'ACCESS_TOKEN_UPDATE_FULFILLED';
+export const ACCESS_TOKEN_UPDATE_PENDING =      'ACCESS_TOKEN_UPDATE_PENDING';
 export const ACCESS_TOKEN_UPDATE_REJECTED =     'ACCESS_TOKEN_UPDATE_REJECTED';
 export const ADD_USER =                         'ADD_USER';
 export const ADD_USERS =                        'ADD_USERS';
@@ -35,8 +35,11 @@ export const FETCH_STORIES_REJECTED =           'FETCH_STORIES_REJECTED';
 export const FETCH_USERS_FULFILLED =            'FETCH_USERS_FULFILLED';
 export const FETCH_USERS_PENDING =              'FETCH_USERS_PENDING';
 export const FETCH_USERS_REJECTED =             'FETCH_USERS_REJECTED';
-export const SHOWING_ITEM_CHANGE =              'SHOWING_ITEM_CHANGE';
 
 export const PURGE_GROUPS =                     'PURGE_GROUPS';
 export const PURGE_STORIES =                    'PURGE_STORIES';
 export const PURGE_USERS =                      'PURGE_USERS';
+export const SHOWING_ITEM_CHANGE =              'SHOWING_ITEM_CHANGE';
+export const SHOW_CREATE_GROUP_FORM =           'SHOW_CREATE_GROUP_FORM';
+export const SHOW_CREATE_STORY_FORM =           'SHOW_CREATE_STORY_FORM';
+

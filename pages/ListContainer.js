@@ -14,7 +14,7 @@ import { fetchGroups, purgeGroups } from '../actions/groupActions'
 const mapDispatchToProps = (dispatch) => {
   return{
     onItemClick: (_id) => {
-      dispatch(showingItemChange(_id));
+      dispatch(actions.showingItemChange(_id));
     },
     //methods to fetch a specific type of item into a clean array for that item
     fetchItems: (listType) => { 
@@ -29,6 +29,12 @@ const mapDispatchToProps = (dispatch) => {
         case "users": dispatch(fetchUsers()); break;
         case "stories": dispatch(fetchStories()); break
         case "groups": dispatch(fetchGroups()); break
+      }
+    },
+    createNewItemClick: (itemType) => {
+      switch(itemType){
+        case "story": dispatch(showCreateStoryForm()); break
+        case "group": dispatch(showCreateGroupForm()); break
       }
     }
   }
@@ -56,12 +62,14 @@ export default class UsersListContainer extends React.Component {
  
   render(){
   
-    const { users, stories, groups, showingItemId, onItemClick, listType, fetchMoreItems, totalUsers, totalStories, totalGroups} = this.props;
+    const { createNewItemClick, users, stories, groups, showingItemId, 
+            onItemClick, listType, fetchMoreItems, 
+            totalUsers, totalStories, totalGroups} = this.props;
 
     switch(listType){
       case "users": return(<Users items={users} showingItemId={showingItemId} onItemClick={onItemClick} totalRows={totalUsers} onFetchMoreItemsClick={fetchMoreItems}/>); break;
       case "groups": return(<Groups items={groups} showingItemId={showingItemId} onItemClick={onItemClick} totalRows={totalGroups} onFetchMoreItemsClick={fetchMoreItems}/>); break;
-      case "stories": return(<Stories items={stories} showingItemId={showingItemId} onItemClick={onItemClick} totalRows={totalStories} onFetchMoreItemsClick={fetchMoreItems}/>); break;      
+      case "stories": return(<Stories createNewItemClick={createNewItemClick} items={stories} showingItemId={showingItemId} onItemClick={onItemClick} totalRows={totalStories} onFetchMoreItemsClick={fetchMoreItems}/>); break;      
     }
   }
 }

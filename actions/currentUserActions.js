@@ -13,7 +13,8 @@ export const login = data => dispatch => {
             ).then((response) => {
                     setAccessToken(response.data, dispatch);
                     localStorage.setItem('currentUser', JSON.stringify(response.data));
-                    dispatch({ type: actions.CURRENT_USER_LOGIN_FULFILLED, payload: response.data })
+                    dispatch({ type: actions.CURRENT_USER_LOGIN_FULFILLED, payload: response.data });
+                    dispatch({ type: actions.ACCESS_TOKEN_UPDATE_FULFILLED, payload: response.data.auth });//I'm keeping the auth info in its own section of the store.
             }) 
             .catch((err) => {
                dispatch({ type: actions.CURRENT_USER_LOGIN_REJECTED, payload: err });

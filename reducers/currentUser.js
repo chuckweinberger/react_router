@@ -4,7 +4,8 @@ import { cloneDeep } from 'lodash'
 const initialState = {
   currentUser: null,
   isLoading:false,
-  error: null
+  error: null,
+  loggedIn: false
 }
 export default function currentUser(state=initialState, action) {
   
@@ -18,10 +19,10 @@ export default function currentUser(state=initialState, action) {
     break;
   case actions.CURRENT_USER_LOGIN_FULFILLED:
     action.payload.loggedIn = true;
-    return { ...state, currentUser: action.payload, isLoading: false, error: null }
+    return { ...state, currentUser: action.payload, isLoading: false, error: null, loggedIn: true }
     break;
   case actions.CURRENT_USER_LOGIN_REJECTED:
-    return { ...state, isLoading: false, error: action.payload }
+    return { ...state, isLoading: false, error: action.payload, loggedIn: false }
     break;
   case actions.CURRENT_USER_LOGOUT_PENDING:
     return { ...state, isLoading: true }
@@ -37,10 +38,10 @@ export default function currentUser(state=initialState, action) {
     break;
   case actions.CREATE_ACCOUNT_FULFILLED:
     action.payload.loggedIn = true;
-    return { ...state, currentUser: action.payload, isLoading: false, error: null }
+    return { ...state, currentUser: action.payload, isLoading: false, error: null, loggedIn: true }
     break;
   case actions.CREATE_ACCOUNT_REJECTED:
-    return { ...state, isLoading: false, error: action.payload }
+    return { ...state, isLoading: false, error: action.payload, loggedIn: false }
     break;
 
   default:

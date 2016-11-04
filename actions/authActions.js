@@ -77,11 +77,11 @@ export const setAccessToken = (currentUser, dispatch) => {
 }
 
 //updates currentUser's authToken with the server.
-export const updateAccessToken = (data, dispatch) => {
+export const updateAccessToken = (currentUser, dispatch) => {
   
   return new Promise(function(resolve, reject){
     
-    const accessToken = data && data.auth && data.auth.accessToken;
+    const accessToken = currentUser && currentUser.auth && currentUser.auth.accessToken;
     const token =  accessToken && accessToken.token;
  
     if( typeof(token) !== 'undefined' ){
@@ -93,11 +93,14 @@ export const updateAccessToken = (data, dispatch) => {
       })
       .then((response) => {
         const accessToken = response.data;
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        currentUser.auth.accessToken = accessToken;
-        console.log("Access token was updated");
-        setAccessToken(currentUser, dispatch);
+        //update the currentUser that we have stored in local storage to reflect the new accessToken
+        let localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
+        localStorageUser.auth.accessToken = accessToken;
+        localStorage.setItem("currentUser", JSON.stringify(localStorageUser));
         dispatch({ type: actions.ACCESS_TOKEN_UPDATE_FULFILLED, payload: {accessToken} })
+        //update the Authorization Bearer header HTTP interupter
+        setAccessToken(currentUser, dispatch);
+        console.log("Access token was updated");
         resolve(accessToken)
       })
       .catch((error) => {

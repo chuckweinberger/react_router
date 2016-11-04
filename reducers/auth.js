@@ -9,7 +9,7 @@ export default function auth(state=initialState, action) {
   
   switch (action.type) {
   case actions.ACCESS_TOKEN_UPDATE_FULFILLED:
-    return { ...state, accessToken: action.payload, fetching: false, error: null}
+    return { ...state, accessToken: action.payload.accessToken, fetching: false, error: null}
     return initialState 
     break;
   case actions.ACCESS_TOKEN_UPDATE_PENDING:

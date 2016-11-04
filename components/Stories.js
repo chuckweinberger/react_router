@@ -8,11 +8,14 @@ import StoryDetails from './StoryDetails'
 export default class Stories extends React.Component {
   render(){
     
-    const { items, showingItemId, onItemClick, totalRows, onFetchMoreItemsClick} = this.props;
+    const { items, showingItemId, onItemClick, totalRows, onFetchMoreItemsClick, createNewItemClick} = this.props;
     
     return (
       <div>
         <div className='col-sm-3 col-md-2 sidebar'>
+          <input type='submit' value='Create a new Story' class='btn btn-default'
+              onClick={()=> createNewItemClick('story')}
+          />
           <h2>List of Stories</h2>
           <ul>
             {items.map(item => 
