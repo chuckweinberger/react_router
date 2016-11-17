@@ -1,25 +1,31 @@
-import { FETCHING, END_FETCHING, SHOWING_ITEM_CHANGE } from '../constants/actionTypes'
+import * as actions from '../constants/actionTypes'
 
 const initialState = {
   showingItemId: null,
-  fetching: false
+  fetching: false,
+  formFields: {},
+  modalType: null,
+  modalProps: {}
 }
 
 export default function uiReducer(state = initialState, action) {
   
   switch (action.type) {
-    case FETCHING: 
+    case actions.FETCHING: 
       return { ...state, fetching: true }      
       break;
-    
-    case END_FETCHING:
+    case actions.END_FETCHING:
       return { ...state, fetching: false }
       break;
-    
-    case SHOWING_ITEM_CHANGE:
+    case actions.SHOWING_ITEM_CHANGE:
       return { ...state, showingItemId: action.showingItemId };
       break;
-    
+    case actions.SHOW_MODAL:
+      return { ...state, modalType: action.payload.modal.modalType, modalProps: action.payload.modal.modalProps }
+      break;
+    case actions.HIDE_MODAL:
+      return { ...state, modalType: null, modalProps: {} }
+      break;
     default:
       return state;
     }

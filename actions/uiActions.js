@@ -1,8 +1,17 @@
-import { SHOWING_ITEM_CHANGE } from '../constants/actionTypes';
+import * as actions from '../constants/actionTypes';
 
-exports.showingItemChange = (showingItemId=null) => {
-  return ({
-    type: SHOWING_ITEM_CHANGE,
+
+exports.showingItemChange = (showingItemId=null) => ({
+    type: actions.SHOWING_ITEM_CHANGE,
     showingItemId
-  });
-}
+});
+
+exports.showModal = ( modal = { modalType: null, modalProps: {} }) => ({
+  type: actions.SHOW_MODAL,
+  payload: modal
+});
+
+exports.hideModal = () => ({
+  type: actions.HIDE_MODAL
+})
+

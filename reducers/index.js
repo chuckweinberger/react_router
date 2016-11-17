@@ -6,6 +6,7 @@ import auth from './auth'
 import groups from './groups'
 import ui from './ui'
 import { routerReducer } from 'react-router-redux'
+import { reducer as formReducer } from 'redux-form'
 
 export default combineReducers({
   users,
@@ -14,5 +15,6 @@ export default combineReducers({
   auth,
   ui,
   groups, 
-  routing:routerReducer
+  routing: routerReducer,
+  form: formReducer
 })

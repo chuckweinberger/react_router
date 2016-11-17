@@ -22,11 +22,12 @@ export const login = data => dispatch => {
 }
 
 //although I want to use redux-promise-middleware for this asynch action, I can't because it auto dispatches the CURRENT_USER_LOGOUT_FULLFILLED prior to my removing the auth token for the logged-out user.  This could cause components that required logged-in users to show there data after the user logs-out.
-export const logout = (data) => dispatch => {
+export const logout = (data) => (dispatch, getState) => {
   
+  let currentUser = getState().currentUser.currentUser;
   dispatch({ type: actions.CURRENT_USER_LOGOUT_PENDING })
   dispatch({ type: actions.FETCHING })
-  axios.delete('/logins/' + data.currentUser._id )
+  axios.delete('/logins/' + currentUser._id )
     .then(() => {
       localStorage.removeItem('currentUser');
       deleteAccessToken(dispatch);

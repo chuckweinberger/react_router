@@ -10,11 +10,13 @@ import { showingItemChange } from '../actions/uiActions'
 import { fetchUsers, purgeUsers } from '../actions/userActions'
 import { fetchStories, purgeStories } from '../actions/storyActions'
 import { fetchGroups, purgeGroups } from '../actions/groupActions'
+import { showModal } from '../actions/uiActions'
+import { CREATE_STORY, CREATE_GROUP } from '../constants/modalTypes'
 
 const mapDispatchToProps = (dispatch) => {
   return{
     onItemClick: (_id) => {
-      dispatch(actions.showingItemChange(_id));
+      dispatch(showingItemChange(_id));
     },
     //methods to fetch a specific type of item into a clean array for that item
     fetchItems: (listType) => { 
@@ -33,8 +35,8 @@ const mapDispatchToProps = (dispatch) => {
     },
     createNewItemClick: (itemType) => {
       switch(itemType){
-        case "story": dispatch(showCreateStoryForm()); break
-        case "group": dispatch(showCreateGroupForm()); break
+        case "story": dispatch(showModal({ modal: { modalType: CREATE_STORY, modalProps: {}}})); break
+        case "group": dispatch(showModal({ modal: { modalType: CREATE_GROUP, modalProps: {}}})); break
       }
     }
   }
@@ -60,6 +62,10 @@ export default class UsersListContainer extends React.Component {
     this.props.fetchItems(this.props.listType)
   }
  
+  constructor(){
+    super();
+  }
+  
   render(){
   
     const { createNewItemClick, users, stories, groups, showingItemId, 

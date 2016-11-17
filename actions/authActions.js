@@ -1,26 +1,30 @@
 import * as actions from '../constants/actionTypes'
 import axios from 'axios'
-//import {logout} from './currentUserActions'
+import {logout} from './currentUserActions'
 
 let authInterceptor,
     responseInterceptor,
     tokenExpirationWatch;
     
 //function that is called whenever we set the auth token so to look at all HTTP responses to see if the
-//currentUser has been logged-out by the server    
+//currentUser has been logged-out by the server.  Note, as currently written this function will create an infinite loop
+//because I'll try to logout a user using his credentials, which are already unauthorized, thus triggering another 401 response
+    
+    
 function insertResponseHeader(currentUser, dispatch) {
-  responseInterceptor = axios.interceptors.response.use(
-    function(response){
-      return response;
-    }, 
-    function(error){
-      if(error.response.status === 401) {
-        dispatch({ type: actions.CURRENT_USER_LOGOUT, payload: {currentUser: currentUser } });
-        return Promies.reject(error)
-      }
-    }
-  )
-}    
+//   responseInterceptor = axios.interceptors.response.use(
+//     function(response){
+//       return response;
+//     },
+//     function(error){
+//       if(error.response.status === 401) {
+//         //dispatch({ type: actions.CURRENT_USER_LOGOUT, payload: {currentUser: currentUser } });
+//         dispatch(logout());
+//       }
+//       return Promise.reject(error)
+//     }
+//   )
+}
     
 //add a header into all http requests that contains the authToken.
 //also sets a timer so that the auth token is updated as it gets close to expiration

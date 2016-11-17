@@ -1,4 +1,4 @@
-import { END_FETCHING, FETCHING, FETCH_GROUPS_FULFILLED, FETCH_GROUPS_REJECTED, PURGE_GROUPS } from '../constants/actionTypes'
+import { CREATE_GROUP, END_FETCHING, FETCHING, FETCH_GROUPS_FULFILLED, FETCH_GROUPS_REJECTED, PURGE_GROUPS } from '../constants/actionTypes'
 import axios from 'axios'
 
 
@@ -23,4 +23,13 @@ export function purgeGroups() {
   return ({
     type: PURGE_GROUPS
   });
+}
+
+export function createGroup(form) {
+  
+  return ({
+    type:CreateGroup,
+    payload: form
+  })
+  
 }

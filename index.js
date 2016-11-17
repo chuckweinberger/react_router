@@ -11,6 +11,7 @@ import Dash from './pages/Dash'
 import Stories from './pages/Stories'
 import ListContainer from './pages/ListContainer' 
 import NoMatch from './pages/NoMatch'
+import ModalRoot from './pages/ModalRoot'
 
 
 //necessary actions
@@ -63,6 +64,7 @@ store.dispatch(restoreCurrentUser)
 ReactDOM.render(
   <Provider store={store}>
     <div>
+      <ModalRoot/>
       <Router history={history}>
         <Route path="/" component={Layout}>
           <IndexRoute component={Dash} />
