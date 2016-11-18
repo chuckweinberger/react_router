@@ -8,7 +8,7 @@ import StoryDetails from './StoryDetails'
 export default class Stories extends React.Component {
   render(){
     
-    const { items, showingItemId, onItemClick, totalRows, onFetchMoreItemsClick, createNewItemClick} = this.props;
+    const { items, showingItem, onItemClick, totalRows, onFetchMoreItemsClick, createNewItemClick} = this.props;
     
     return (
       <div>
@@ -19,7 +19,7 @@ export default class Stories extends React.Component {
           <h2>List of Stories</h2>
           <div class="accordion">
             {items.map((item, i) => 
-              <section class="accordion-item" key={i} onClick={() => onItemClick(item._id)} >
+              <section class="accordion-item" key={i} onClick={() => onItemClick(item)} >
                 <h1><a href="#" >{item.title}</a></h1>
                 <Story story={item}/>
               </section>
@@ -28,7 +28,7 @@ export default class Stories extends React.Component {
           { items.length < totalRows && <button type="button" onClick={() => onFetchMoreItemsClick("stories")}>Fetch More</button> }
         </div>
         <div className='col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main'>
-          <StoryDetails showingItemId={ showingItemId } />
+          <StoryDetails showingItem={ showingItem } createNewItemClick= { createNewItemClick } />
         </div>
       </div>
       

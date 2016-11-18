@@ -11,12 +11,12 @@ import { fetchUsers, purgeUsers } from '../actions/userActions'
 import { fetchStories, purgeStories } from '../actions/storyActions'
 import { fetchGroups, purgeGroups } from '../actions/groupActions'
 import { showModal } from '../actions/uiActions'
-import { CREATE_STORY, CREATE_GROUP } from '../constants/modalTypes'
+import * as modalType from '../constants/modalTypes'
 
 const mapDispatchToProps = (dispatch) => {
   return{
-    onItemClick: (_id) => {
-      dispatch(showingItemChange(_id));
+    onItemClick: (item) => {
+      dispatch(showingItemChange(item));
     },
     //methods to fetch a specific type of item into a clean array for that item
     fetchItems: (listType) => { 
@@ -35,8 +35,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     createNewItemClick: (itemType) => {
       switch(itemType){
-        case "story": dispatch(showModal({ modal: { modalType: CREATE_STORY, modalProps: {}}})); break
-        case "group": dispatch(showModal({ modal: { modalType: CREATE_GROUP, modalProps: {}}})); break
+        case "story": dispatch(showModal({ modal: { modalType: modalType.CREATE_STORY, modalProps: {}}})); break
+        case "group": dispatch(showModal({ modal: { modalType: modalType.CREATE_GROUP, modalProps: {}}})); break
+        case "post": dispatch(showModal({ modal: { modalType: modalType.CREATE_POST, modalProps: {}}})); break
       }
     }
   }
@@ -47,7 +48,7 @@ const mapStateToProps = (store) => {
     groups: store.groups.groups,
     stories: store.stories.stories,
     users: store.users.users,
-    showingItemId: store.ui.showingItemId,
+    showingItem: store.ui.showingItem,
     totalUsers: store.users.totalRows,
     totalStories: store.stories.totalRows,
     totalGroups: store.groups.totalRows
@@ -68,14 +69,14 @@ export default class listContainer extends React.Component {
   
   render(){
   
-    const { createNewItemClick, users, stories, groups, showingItemId, 
+    const { createNewItemClick, users, stories, groups, showingItem, 
             onItemClick, listType, fetchMoreItems, 
             totalUsers, totalStories, totalGroups} = this.props;
 
     switch(listType){
-      case "users": return(<Users items={users} showingItemId={showingItemId} onItemClick={onItemClick} totalRows={totalUsers} onFetchMoreItemsClick={fetchMoreItems}/>); break;
-      case "groups": return(<Groups items={groups} showingItemId={showingItemId} onItemClick={onItemClick} totalRows={totalGroups} onFetchMoreItemsClick={fetchMoreItems}/>); break;
-      case "stories": return(<Stories createNewItemClick={createNewItemClick} items={stories} showingItemId={showingItemId} onItemClick={onItemClick} totalRows={totalStories} onFetchMoreItemsClick={fetchMoreItems}/>); break;      
+      case "users": return(<Users items={users} showingItem={showingItem} onItemClick={onItemClick} totalRows={totalUsers} onFetchMoreItemsClick={fetchMoreItems}/>); break;
+      case "groups": return(<Groups items={groups} showingItem={showingItem} onItemClick={onItemClick} totalRows={totalGroups} onFetchMoreItemsClick={fetchMoreItems}/>); break;
+      case "stories": return(<Stories createNewItemClick={createNewItemClick} items={stories} showingItem={showingItem} onItemClick={onItemClick} totalRows={totalStories} onFetchMoreItemsClick={fetchMoreItems}/>); break;      
     }
   }
 }

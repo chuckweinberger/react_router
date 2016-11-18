@@ -8,7 +8,7 @@ import GroupDetails from './GroupDetails'
 export default class Groups extends React.Component {
   render(){
     
-    const { items, showingItemId, onItemClick, totalRows, onFetchMoreItemsClick} = this.props;
+    const { items, showingItem, onItemClick, totalRows, onFetchMoreItemsClick} = this.props;
     
     return (
       <div>
@@ -18,7 +18,7 @@ export default class Groups extends React.Component {
             {items.map(item => 
               <li key={item._id}>
                 <Group {...item}
-                      onClick={() => onItemClick(item._id)}
+                      onClick={() => onItemClick(item)}
                 />
               </li>
           )}
@@ -26,7 +26,7 @@ export default class Groups extends React.Component {
           { items.length < totalRows && <button type="button" onClick={() => onFetchMoreItemsClick("groups")}>Fetch More</button> }
         </div>
         <div className='col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main'>
-          <GroupDetails showingItemId={ showingItemId } />
+          <GroupDetails showingItem={ showingItem } />
         </div>
       </div>
       

@@ -1,7 +1,7 @@
 import * as actions from '../constants/actionTypes'
 
 const initialState = {
-  showingItemId: null,
+  showingItem: {},
   fetching: false,
   formFields: {},
   modalType: null,
@@ -18,7 +18,7 @@ export default function uiReducer(state = initialState, action) {
       return { ...state, fetching: false }
       break;
     case actions.SHOWING_ITEM_CHANGE:
-      return { ...state, showingItemId: action.showingItemId };
+      return { ...state, showingItem: action.showingItem };
       break;
     case actions.SHOW_MODAL:
       return { ...state, modalType: action.payload.modal.modalType, modalProps: action.payload.modal.modalProps }

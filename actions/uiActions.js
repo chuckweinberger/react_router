@@ -1,9 +1,9 @@
 import * as actions from '../constants/actionTypes';
 
 
-exports.showingItemChange = (showingItemId=null) => ({
+exports.showingItemChange = (showingItem=null) => ({
     type: actions.SHOWING_ITEM_CHANGE,
-    showingItemId
+    showingItem
 });
 
 exports.showModal = ( modal = { modalType: null, modalProps: {} }) => ({

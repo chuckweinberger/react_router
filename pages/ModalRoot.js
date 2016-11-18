@@ -2,12 +2,14 @@
 import React, { propType } from 'react'
 import CreateStoryModal from '../components/CreateStoryModal'
 import CreateGroupModal from '../components/CreateGroupModal'
-import { CREATE_STORY, CREATE_GROUP } from '../constants/modalTypes'
+import CreatePostModal from '../components/CreatePostModal'
 import { connect } from 'react-redux'
 
 const MODAL_COMPONENTS = {
   CREATE_STORY: CreateStoryModal,
   CREATE_GROUP: CreateGroupModal,
+  CREATE_POST: CreatePostModal
+  
   /* other modals */
 }
 

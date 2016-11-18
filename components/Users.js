@@ -7,7 +7,7 @@ import UserDetails from './UserDetails'
 export default class Users extends React.Component {
   render(){
     
-    const { items, showingItemId, onItemClick, totalRows, onFetchMoreItemsClick} = this.props;
+    const { items, showingItem, onItemClick, totalRows, onFetchMoreItemsClick} = this.props;
     
     return (
       <div>
@@ -17,7 +17,7 @@ export default class Users extends React.Component {
             {items.map(item => 
               <li key={item._id}>
                 <User {...item}
-                      onClick={() => onItemClick(item._id)}
+                      onClick={() => onItemClick(item)}
                 />
               </li>
           )}
@@ -25,7 +25,7 @@ export default class Users extends React.Component {
           { items.length < totalRows && <button type="button" onClick={() => onFetchMoreItemsClick("users")}>Fetch More</button> }
         </div>
         <div className='col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main'>
-          <UserDetails showingItemId={ showingItemId } />
+          <UserDetails showingItem={ showingItem } />
         </div>
       </div>
       

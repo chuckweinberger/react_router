@@ -67,3 +67,30 @@ export const createStory = (data) => dispatch => {
       throw new SubmissionError(errorWrapper);
     })
   }
+  
+  export const createPost = (data) => dispatch => {
+  
+    dispatch({ type: actions.FETCHING });
+
+    return dispatch({ type: actions.CREATE_POST,
+               payload: axios.post('stories/' + data.post.story + '/posts', data)})
+      .then((response) => {
+        dispatch({ type: actions.END_FETCHING })
+      })
+      .catch(({response}) => {
+        dispatch({ type: actions.END_FETCHING })
+        let errors = response.data.errors;
+        //create an object that contains keys of all of the form fields where there are errors
+        //along with the associated error messages
+        let errorWrapper = { post: { } };
+        for (var i=0; i<errors.length; i++){
+          const error = response.data.errors[i];
+          const errorField = error.path.split('/')[1];
+          console.log(errorField, error.message);
+          errorWrapper.post[errorField]  = error.message;
+        }
+        //add to the error object a general form submission failure.  
+        errorWrapper._error = "Post creation failed";
+        throw new SubmissionError(errorWrapper);
+      })
+    }
