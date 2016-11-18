@@ -1,10 +1,13 @@
 // components/Story
+import TimeAgo from 'react-timeago'
 
 import React, { propType } from 'react';
     
-    export default ({ onClick, title, _id }) => (
+    export default ({ onClick, story }) => (
 
-			<a onClick={onClick}>
-        <h4>{title || _id}</h4>
-			</a>
+			<div class="accordion-item-content" onClick={onClick}>
+        <div>No. of posts: {story.posts.length}</div>
+        <div>Created: <TimeAgo date={story.created} /></div>
+        <div>Last Updated: <TimeAgo date={story.posts[0].created} /></div>
+      </div>
     )

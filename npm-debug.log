@@ -1,13 +1,15 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'start' ]
-2 info using npm@3.8.9
-3 info using node@v6.2.0
+1 verbose cli [ '/Users/charlesweinberger/.nvm/versions/node/v7.1.0/bin/node',
+1 verbose cli   '/Users/charlesweinberger/.nvm/versions/node/v7.1.0/bin/npm',
+1 verbose cli   'start' ]
+2 info using npm@3.10.9
+3 info using node@v7.1.0
 4 verbose run-script [ 'prestart', 'start', 'poststart' ]
 5 info lifecycle tutorial@1.0.0~prestart: tutorial@1.0.0
 6 silly lifecycle tutorial@1.0.0~prestart: no script for prestart, continuing
 7 info lifecycle tutorial@1.0.0~start: tutorial@1.0.0
 8 verbose lifecycle tutorial@1.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle tutorial@1.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/charlesweinberger/Desktop/General Software Development/react-router-tutorial/lessons/02-rendering-a-route/node_modules/.bin:/usr/local/bin:/Users/charlesweinberger/.rvm/gems/ruby-2.1.1/bin:/Users/charlesweinberger/.rvm/gems/ruby-2.1.1@global/bin:/Users/charlesweinberger/.rvm/rubies/ruby-2.1.1/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/Users/charlesweinberger/.rvm/bin
+9 verbose lifecycle tutorial@1.0.0~start: PATH: /Users/charlesweinberger/.nvm/versions/node/v7.1.0/lib/node_modules/npm/bin/node-gyp-bin:/Users/charlesweinberger/Desktop/General Software Development/react-router-tutorial/lessons/02-rendering-a-route/node_modules/.bin:/Users/charlesweinberger/.nvm/versions/node/v7.1.0/bin:/usr/local/sbin:/Users/charlesweinberger/.rvm/gems/ruby-2.1.1/bin:/Users/charlesweinberger/.rvm/gems/ruby-2.1.1@global/bin:/Users/charlesweinberger/.rvm/rubies/ruby-2.1.1/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/Users/charlesweinberger/.rvm/bin
 10 verbose lifecycle tutorial@1.0.0~start: CWD: /Users/charlesweinberger/Desktop/General Software Development/react-router-tutorial/lessons/02-rendering-a-route
 11 silly lifecycle tutorial@1.0.0~start: Args: [ '-c',
 11 silly lifecycle   'if-env NODE_ENV=production && npm run start:prod || npm run start:dev' ]
@@ -15,20 +17,20 @@
 13 info lifecycle tutorial@1.0.0~start: Failed to exec start script
 14 verbose stack Error: tutorial@1.0.0 start: `if-env NODE_ENV=production && npm run start:prod || npm run start:dev`
 14 verbose stack Exit status 134
-14 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:245:16)
+14 verbose stack     at EventEmitter.<anonymous> (/Users/charlesweinberger/.nvm/versions/node/v7.1.0/lib/node_modules/npm/lib/utils/lifecycle.js:255:16)
 14 verbose stack     at emitTwo (events.js:106:13)
 14 verbose stack     at EventEmitter.emit (events.js:191:7)
-14 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:24:14)
+14 verbose stack     at ChildProcess.<anonymous> (/Users/charlesweinberger/.nvm/versions/node/v7.1.0/lib/node_modules/npm/lib/utils/spawn.js:40:14)
 14 verbose stack     at emitTwo (events.js:106:13)
 14 verbose stack     at ChildProcess.emit (events.js:191:7)
-14 verbose stack     at maybeClose (internal/child_process.js:850:16)
-14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:215:5)
+14 verbose stack     at maybeClose (internal/child_process.js:885:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
 15 verbose pkgid tutorial@1.0.0
 16 verbose cwd /Users/charlesweinberger/Desktop/General Software Development/react-router-tutorial/lessons/02-rendering-a-route
 17 error Darwin 15.0.0
-18 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "start"
-19 error node v6.2.0
-20 error npm  v3.8.9
+18 error argv "/Users/charlesweinberger/.nvm/versions/node/v7.1.0/bin/node" "/Users/charlesweinberger/.nvm/versions/node/v7.1.0/bin/npm" "start"
+19 error node v7.1.0
+20 error npm  v3.10.9
 21 error code ELIFECYCLE
 22 error tutorial@1.0.0 start: `if-env NODE_ENV=production && npm run start:prod || npm run start:dev`
 22 error Exit status 134

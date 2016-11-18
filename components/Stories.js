@@ -17,15 +17,14 @@ export default class Stories extends React.Component {
               onClick={()=> createNewItemClick('story')}
           />
           <h2>List of Stories</h2>
-          <ul>
-            {items.map(item => 
-              <li key={item._id}>
-                <Story {...item}
-                      onClick={() => onItemClick(item._id)}
-                />
-              </li>
-          )}
-      	  </ul>
+          <div class="accordion">
+            {items.map((item, i) => 
+              <section class="accordion-item" key={i} onClick={() => onItemClick(item._id)} >
+                <h1><a href="#" >{item.title}</a></h1>
+                <Story story={item}/>
+              </section>
+            )}
+      	  </div>
           { items.length < totalRows && <button type="button" onClick={() => onFetchMoreItemsClick("stories")}>Fetch More</button> }
         </div>
         <div className='col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main'>

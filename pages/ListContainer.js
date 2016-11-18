@@ -56,7 +56,7 @@ const mapStateToProps = (store) => {
 
 @connect(mapStateToProps, mapDispatchToProps)
 
-export default class UsersListContainer extends React.Component {
+export default class listContainer extends React.Component {
   
   componentWillMount(){
     this.props.fetchItems(this.props.listType)

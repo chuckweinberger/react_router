@@ -67,24 +67,3 @@ export const createStory = (data) => dispatch => {
       throw new SubmissionError(errorWrapper);
     })
   }
-    
-  // return dispatch({ type: actions.CREATE_STORY,
-  //              payload: axios.post(path, data)})
-  //   .then((response) => {
-  //     dispatch({ type: actions.END_FETCHING })
-  //   })
-  //   .catch(({response}) => {
-  //     let errors = response.data.errors;
-  //     for (var i=0; i<errors.length; i++){
-  //       const error = response.data.errors[i];
-  //       const errorField = error.path.split('/')[1];
-  //       console.log(errorField, error.message);
-  //       let errorWrapper = {};
-  //       errorWrapper[errorField]  = error.message;
-  //       errorWrapper._error = "Story creation failed";
-  //       errors[i] = errorWrapper;
-  //     }
-  //     throw new SubmissionError(errors);
-  //   })
-  //
-  //}
